@@ -2,6 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "huttese",
   "compatibility_date": "2026-10-01",
+  "routes": [{ "pattern": "huttese.benrichardson.dev", "custom_domain": true }],
+  "workers_dev": false,
   // Static assets only – no Worker script, no backend. Progress lives in the browser's localStorage.
   "assets": {
     "directory": "./dist",
