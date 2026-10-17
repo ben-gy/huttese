@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { WORDS, PHRASES } from '../data/course';
+import { renderScript } from '../lib/script';
+
+const entries = [...WORDS.map((w) => ({ ...w, kind: 'word' })), ...PHRASES.map((p) => ({ ...p, cat: 'phrases', kind: 'phrase' }))].sort((a, b) =>
+  a.hut.localeCompare(b.hut),
+);
+const cats = ['all', ...new Set(entries.map((e) => e.cat))];
+---
+
+<Base title="Dictionary" description="Every Huttese word and phrase in the course, with Hutt script, pronunciation and meaning.">
+  <header class="page-head">
+    <h1>Dictionary</h1>
+    <p>{entries.length} words and phrases. Tap 🔊 to hear one. Bars show how strong each word is in your memory.</p>
+  </header>
+
+  <input class="search" type="search" placeholder="Search Huttese or English…" aria-label="Search the dictionary" data-q />
+  <div class="filters" data-filters>
+    {cats.map((c, i) => <button type="button" aria-pressed={i === 0 ? 'true' : 'false'} data-cat={c}>{c}</button>)}
+  </div>
+
+  <div class="entries">
+    {
+      entries.map((e) => (
+        <article class="entry" data-entry data-id={e.id} data-cat={e.cat} data-search={`${e.hut} ${e.en}`.toLowerCase()} data-pron={e.pron}>
+          <div class="e-script">
+            <Fragment set:html={renderScript(e.hut, { size: 20 })} />
+          </div>
+          <div>
+            <span class="e-hut">{e.hut}</span>
+            <span class="strength" data-strength aria-hidden="true" />
+          </div>
+          <div>
+            <span class="e-pron">{e.pron}</span> <span class="ipa">{e.ipa}</span> — <span class="e-en">{e.en}</span>
+          </div>
+          <button type="button" class="speaker" aria-label={`Play ${e.hut}`} data-play>
+            🔊
+          </button>
+          <div class="e-note">
+            {e.note}
+            {!e.sure && ' · (meaning less certain – from fan sources)'}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+  <p class="empty" data-none hidden>No matches. Poodoo.</p>
+</Base>
+
+<script>
+  import { speak, canSpeak } from '../lib/audio';
+  import { load, strength } from '../lib/progress';
+
+  const p = load();
+  const entries = [...document.querySelectorAll<HTMLElement>('[data-entry]')];
+  const q = document.querySelector<HTMLInputElement>('[data-q]')!;
+  const none = document.querySelector<HTMLElement>('[data-none]')!;
+  let cat = 'all';
+
+  for (const e of entries) {
+    const s = strength(p.words[e.dataset.id!]);
+    const bars = p.words[e.dataset.id!] ? Math.max(1, Math.round(s * 4)) : 0;
+    e.querySelector('[data-strength]')!.innerHTML = [0, 1, 2, 3].map((i) => `<i class="${i < bars ? 'on' : ''}"></i>`).join('');
+    const btn = e.querySelector<HTMLButtonElement>('[data-play]')!;
+    if (!canSpeak() || !p.settings.speech) btn.hidden = true;
+    btn.addEventListener('click', () => speak(e.dataset.pron!));
+  }
+
+  const apply = () => {
+    const term = q.value.trim().toLowerCase();
+    let shown = 0;
+    for (const e of entries) {
+      const ok = (cat === 'all' || e.dataset.cat === cat) && (!term || e.dataset.search!.includes(term));
+      e.hidden = !ok;
+      if (ok) shown++;
+    }
+    none.hidden = shown > 0;
+  };
+  q.addEventListener('input', apply);
+  document.querySelectorAll<HTMLButtonElement>('[data-filters] button').forEach((b) =>
+    b.addEventListener('click', () => {
+      cat = b.dataset.cat!;
+      document.querySelectorAll('[data-filters] button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      apply();
+    }),
+  );
+</script>

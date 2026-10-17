@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import LessonShell from '../../components/LessonShell.astro';
+import { ALL_LESSONS } from '../../data/course';
+
+export function getStaticPaths() {
+  return ALL_LESSONS.map((l) => ({ params: { id: l.id }, props: { lesson: l } }));
+}
+const { lesson } = Astro.props;
+---
+
+<Base title={lesson.title} bare>
+  <LessonShell id={lesson.id} title={lesson.title} />
+</Base>
+
+<script>
+  import { mountPlayer } from '../../lib/player';
+  import { generate } from '../../lib/engine';
+  import { ALL_LESSONS } from '../../data/course';
+  import { load } from '../../lib/progress';
+  import { canSpeak } from '../../lib/audio';
+
+  const root = document.querySelector<HTMLElement>('[data-lesson-root]')!;
+  const lesson = ALL_LESSONS.find((l) => l.id === root.dataset.id)!;
+  const p = load();
+  const exercises = generate(lesson, { firstTime: !p.lessons[lesson.id], speech: p.settings.speech && canSpeak() });
+  mountPlayer(root, { lessonId: lesson.id, title: lesson.title, exercises });
+</script>

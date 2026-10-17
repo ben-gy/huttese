@@ -1,0 +1,123 @@
+---
+import '../styles/global.css';
+import { renderScript } from '../lib/script';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bare?: boolean; // lesson pages: no navigation chrome
+}
+const { title, description = 'Learn Huttese, the language of Jabba the Hutt – free, bite-sized lessons with Hutt script, pronunciation and audio. No account needed.', bare = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/', label: 'Learn', ico: '🏜️' },
+  { href: '/practice', label: 'Practice', ico: '🎯' },
+  { href: '/script', label: 'Hutt script', ico: '✎' },
+  { href: '/dictionary', label: 'Dictionary', ico: '📖' },
+  { href: '/settings', label: 'Settings', ico: '⚙️' },
+];
+const current = (href: string) => (href === '/' ? path === '/' : path.startsWith(href) ? 'page' : undefined);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title ? `${title} · Huttese` : 'Huttese – learn the language of Jabba the Hutt'}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#6f8a2a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <script is:inline>
+      try {
+        const s = JSON.parse(localStorage.getItem('huttese:v1') || '{}').settings || {};
+        if (s.theme) document.documentElement.dataset.theme = s.theme;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    {
+      bare ? (
+        <slot />
+      ) : (
+        <div class="shell">
+          <nav class="sidenav" aria-label="Main">
+            <a class="brand" href="/">
+              <Fragment set:html={renderScript('hutt', { size: 22, label: 'Hutt' })} />
+              <span class="brand-name">huttese</span>
+            </a>
+            {nav.map((n) => (
+              <a class="navlink" href={n.href} aria-current={current(n.href) ? 'page' : undefined}>
+                <span class="ico" aria-hidden="true">{n.ico}</span>
+                <span class="lbl">{n.label}</span>
+              </a>
+            ))}
+          </nav>
+          <main class="main">
+            <div class="mobiletop">
+              <a class="brand" href="/">
+                <span class="brand-name">huttese</span>
+              </a>
+              <div class="topstats">
+                <span class="streak" data-streak-wrap>🔥 <b data-streak>0</b></span>
+                <span class="xp">⚡ <b data-xp>0</b></span>
+              </div>
+            </div>
+            <slot />
+          </main>
+          <aside class="aside">
+            <div class="topstats">
+              <span class="streak" data-streak-wrap title="Day streak">🔥 <b data-streak>0</b></span>
+              <span class="xp" title="Total XP">⚡ <b data-xp>0</b></span>
+            </div>
+            <div class="panel">
+              <h3>Daily goal</h3>
+              <p><b data-today>0</b> / <span data-goal>30</span> XP today</p>
+              <div class="meter"><div data-goal-meter></div></div>
+              <div class="week" data-week></div>
+            </div>
+            <slot name="aside" />
+            <p class="footnote">
+              An unofficial fan project. Star Wars, Jabba the Hutt and Huttese are trademarks of Lucasfilm Ltd. Vocabulary is drawn from the films and
+              Ben Burtt’s <em>Galactic Phrase Book &amp; Travel Guide</em>; the Hutt glyphs are an original design. Your progress is stored only in this browser.
+            </p>
+          </aside>
+          <nav class="mobilebar" aria-label="Main">
+            {nav.map((n) => (
+              <a href={n.href} aria-current={current(n.href) ? 'page' : undefined} aria-label={n.label}>
+                {n.ico}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )
+    }
+    <script>
+      import { load, streak, todayXp, today } from '../lib/progress';
+      const p = load();
+      const s = streak(p);
+      document.querySelectorAll('[data-streak]').forEach((e) => (e.textContent = String(s)));
+      document.querySelectorAll('[data-streak-wrap]').forEach((e) => e.classList.toggle('off', s === 0));
+      document.querySelectorAll('[data-xp]').forEach((e) => (e.textContent = String(p.xp)));
+      const t = todayXp(p);
+      document.querySelectorAll('[data-today]').forEach((e) => (e.textContent = String(t)));
+      document.querySelectorAll('[data-goal]').forEach((e) => (e.textContent = String(p.dailyGoal)));
+      document.querySelectorAll<HTMLElement>('[data-goal-meter]').forEach((e) => (e.style.width = `${Math.min(100, (t / p.dailyGoal) * 100)}%`));
+      const week = document.querySelector('[data-week]');
+      if (week) {
+        const d = new Date();
+        d.setDate(d.getDate() - 6);
+        let html = '';
+        for (let i = 0; i < 7; i++) {
+          const on = (p.days[today(d)] ?? 0) > 0;
+          html += `<div>${d.toLocaleDateString(undefined, { weekday: 'narrow' })}<i class="${on ? 'on' : ''}">${on ? '✓' : ''}</i></div>`;
+          d.setDate(d.getDate() + 1);
+        }
+        week.innerHTML = html;
+      }
+    </script>
+  </body>
+</html>

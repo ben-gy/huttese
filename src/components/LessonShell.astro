@@ -1,0 +1,24 @@
+---
+interface Props {
+  id: string;
+  title: string;
+}
+const { id, title } = Astro.props;
+---
+
+<div class="lesson" data-lesson-root data-id={id}>
+  <header class="lesson-top">
+    <a class="x" href="/" aria-label="Quit lesson">✕</a>
+    <div class="bar" role="progressbar" aria-label={`${title} progress`}><div data-fill></div></div>
+    <div class="hearts" title="Hearts"><span aria-hidden="true">❤️</span><span data-hearts>5</span></div>
+  </header>
+  <section class="stage" data-stage aria-live="polite">
+    <noscript><p>This lesson needs JavaScript.</p></noscript>
+  </section>
+  <footer class="footer" data-footer>
+    <div class="footer-inner">
+      <div class="feedback" data-feedback role="status"></div>
+      <button type="button" class="btn" data-action disabled>Check</button>
+    </div>
+  </footer>
+</div>

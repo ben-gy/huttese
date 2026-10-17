@@ -1,0 +1,156 @@
+---
+import Base from '../layouts/Base.astro';
+import { UNITS, ALL_LESSONS, lessonIcon } from '../data/course';
+import { renderScript } from '../lib/script';
+
+const offsets = [0, 44, 70, 44, 0, -44, -70, -44];
+let n = 0;
+const colours: Record<string, [string, string]> = {
+  hutt: ['var(--hutt)', 'var(--hutt-dark)'],
+  blue: ['var(--blue)', 'var(--blue-dark)'],
+  amber: ['var(--amber)', 'var(--amber-dark)'],
+  violet: ['var(--violet)', 'var(--violet-dark)'],
+  red: ['var(--red)', 'var(--red-dark)'],
+};
+const kindLabel = { glyphs: 'Hutt script', words: 'Vocabulary', phrases: 'Phrases' };
+---
+
+<Base>
+  <div class="welcome" data-welcome hidden>
+    <div class="mascot" aria-hidden="true">🐌</div>
+    <div class="bubble">
+      <p><strong>Bo shuda!</strong> Welcome, ootmian. Learn to read, say and understand Huttese – one bite-sized lesson at a time. No account needed; your progress stays in this browser.</p>
+    </div>
+  </div>
+
+  {
+    UNITS.map((u, ui) => {
+      const [c, cd] = colours[u.colour];
+      return (
+        <section class="unit" style={`--c:${c};--cd:${cd}`}>
+          <div class="unit-banner">
+            <div>
+              <small>Unit {ui + 1}</small>
+              <h2>{u.title}</h2>
+              <p>{u.blurb}</p>
+            </div>
+            <Fragment set:html={renderScript(u.title.split(' ')[0].replace(/[’']/g, ''), { size: 22 })} />
+          </div>
+          {u.tips.length > 0 && (
+            <details class="panel guidebook" style="margin-top:14px">
+              <summary>
+                <b>📘 Guidebook</b> – tips for this unit
+              </summary>
+              {u.tips.map((t) => (
+                <div class="tip">
+                  <h3>{t.title}</h3>
+                  <p>{t.text}</p>
+                </div>
+              ))}
+            </details>
+          )}
+          <div class="path">
+            {u.lessons.map((l) => {
+              const x = offsets[n++ % offsets.length];
+              const idx = ALL_LESSONS.indexOf(l);
+              return (
+                <div class="node-wrap" style={`--x:${x}px`} data-lesson={l.id} data-index={idx}>
+                  <button type="button" class="node locked" aria-label={`${l.title} (${kindLabel[l.kind]})`} aria-expanded="false">
+                    <span aria-hidden="true">{lessonIcon(l)}</span>
+                  </button>
+                  <div class="node-label">{l.title}</div>
+                  <div class="popover" hidden>
+                    <h3>{l.title}</h3>
+                    <p data-pop-text>{kindLabel[l.kind]}</p>
+                    <a class="btn" href={`/lesson/${l.id}`}>
+                      Start
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <div class="empty" data-finished hidden>
+    <div class="big">👑</div>
+    <h2>You finished the course!</h2>
+    <p>Jabba declares you an honorary Hutt. Keep your words strong in <a href="/practice">Practice</a>.</p>
+  </div>
+</Base>
+
+<style>
+  .guidebook summary {
+    cursor: pointer;
+    color: var(--ink-2);
+  }
+  .guidebook summary b {
+    color: var(--ink);
+  }
+  .tip {
+    margin-top: 14px;
+  }
+  .tip h3 {
+    margin-bottom: 2px;
+    font-size: 1rem;
+  }
+</style>
+
+<script>
+  import { load } from '../lib/progress';
+  import { ALL_LESSONS } from '../data/course';
+
+  const p = load();
+  if (p.xp === 0) document.querySelector<HTMLElement>('[data-welcome]')!.hidden = false;
+
+  const firstUndone = ALL_LESSONS.findIndex((l) => !p.lessons[l.id]);
+  if (firstUndone === -1) document.querySelector<HTMLElement>('[data-finished]')!.hidden = false;
+
+  const wraps = [...document.querySelectorAll<HTMLElement>('[data-lesson]')];
+  for (const wrap of wraps) {
+    const id = wrap.dataset.lesson!;
+    const idx = Number(wrap.dataset.index);
+    const node = wrap.querySelector<HTMLButtonElement>('.node')!;
+    const pop = wrap.querySelector<HTMLElement>('.popover')!;
+    const text = pop.querySelector<HTMLElement>('[data-pop-text]')!;
+    const btn = pop.querySelector<HTMLAnchorElement>('.btn')!;
+    const rec = p.lessons[id];
+    const unlocked = idx === 0 || !!p.lessons[ALL_LESSONS[idx - 1].id] || !!rec;
+
+    node.classList.toggle('locked', !unlocked);
+    node.classList.toggle('done', !!rec);
+    if (idx === firstUndone) {
+      node.classList.add('current');
+      const b = document.createElement('div');
+      b.className = 'start-bubble';
+      b.textContent = p.xp === 0 ? 'Start' : 'Next';
+      wrap.prepend(b);
+    }
+    if (rec) {
+      text.textContent += ` · completed ${rec.done}× · best ${Math.round(rec.best * 100)}%`;
+      btn.textContent = 'Practise again +XP';
+    } else if (!unlocked) {
+      pop.classList.add('locked');
+      text.textContent = 'Complete the lessons before this one to unlock it.';
+      btn.textContent = 'Locked';
+    }
+
+    node.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = pop.hidden;
+      document.querySelectorAll<HTMLElement>('.popover').forEach((x) => (x.hidden = true));
+      document.querySelectorAll('.node').forEach((x) => x.setAttribute('aria-expanded', 'false'));
+      pop.hidden = !open;
+      node.setAttribute('aria-expanded', String(open));
+    });
+  }
+  document.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).closest('.popover')) document.querySelectorAll<HTMLElement>('.popover').forEach((x) => (x.hidden = true));
+  });
+
+  // Bring the current lesson into view for returning learners.
+  if (p.xp > 0 && firstUndone > 2) wraps[firstUndone]?.scrollIntoView({ block: 'center' });
+</script>

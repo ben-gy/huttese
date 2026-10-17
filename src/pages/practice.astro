@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import LessonShell from '../components/LessonShell.astro';
+---
+
+<Base title="Practice" bare>
+  <LessonShell id="practice" title="Practice" />
+</Base>
+
+<script>
+  import { mountPlayer } from '../lib/player';
+  import { generateReview, wordItem, phraseItem, shuffle } from '../lib/engine';
+  import { ALL_LESSONS } from '../data/course';
+  import { load, strength } from '../lib/progress';
+  import { canSpeak } from '../lib/audio';
+
+  const root = document.querySelector<HTMLElement>('[data-lesson-root]')!;
+  const p = load();
+  const done = ALL_LESSONS.filter((l) => p.lessons[l.id]);
+  const words = [...new Set(done.flatMap((l) => l.words ?? []))].map(wordItem);
+  const phrases = [...new Set(done.flatMap((l) => l.phrases ?? []))].map(phraseItem);
+
+  if (words.length < 4) {
+    root.querySelector('[data-stage]')!.innerHTML = `
+      <div class="empty">
+        <div class="big">🎯</div>
+        <h2>Nothing to practise yet</h2>
+        <p>Finish a couple of vocabulary lessons and your weakest words will show up here for review.</p>
+        <p><a class="btn" href="/">Go to lessons</a></p>
+      </div>`;
+    root.querySelector<HTMLElement>('[data-footer]')!.hidden = true;
+  } else {
+    // Weakest first, with a little shuffle so sessions differ.
+    const rank = (id: string) => strength(p.words[id]) + Math.random() * 0.15;
+    const weak = [...shuffle(words).sort((a, b) => rank(a.id) - rank(b.id)), ...shuffle(phrases).sort((a, b) => rank(a.id) - rank(b.id))];
+    const exercises = generateReview(weak, p.settings.speech && canSpeak());
+    mountPlayer(root, { lessonId: 'practice', title: 'Practice', exercises, practice: true });
+  }
+</script>
