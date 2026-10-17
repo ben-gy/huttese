@@ -56,7 +56,7 @@ const norm = (s: string) =>
 const STOP = new Set('a an the of to as in is it and or for be with at on'.split(' '));
 const SYNONYMS: Record<string, string> = {
   hello: 'greet', greetings: 'greet', greeting: 'greet', hi: 'greet',
-  me: 'i', myself: 'i', mine: 'i',
+  me: 'i',
   fool: 'idiot', worm: 'idiot', stupid: 'idiot',
   dung: 'fodder', crap: 'fodder',
   weapon: 'gun', blaster: 'gun',
@@ -109,7 +109,10 @@ const options = (item: Item, pool: Item[], n = 3, _field?: 'hut' | 'en' | 'pron'
 /** Other words that mean the same thing – accepted as typed answers too. */
 export function equivalents(item: Item): string[] {
   const s = sense(item.en);
-  return [...WORDS, ...PHRASES].filter((w) => w.id !== item.id && sameSense(sense(w.en), s)).map((w) => w.hut);
+  const first = sense(firstMeaning(item.en));
+  return [...WORDS, ...PHRASES]
+    .filter((w) => w.id !== item.id && (sameSense(sense(w.en), s) || sameSense(sense(firstMeaning(w.en)), first)))
+    .map((w) => w.hut);
 }
 
 // ---------- answer checking ----------

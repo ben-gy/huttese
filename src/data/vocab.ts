@@ -7,7 +7,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "hut": "bo shuda",
   "en": "greetings (friendly exclamation)",
   "pron": "BOH SHOO-dah",
-  "ipa": "/bo ˈʃuda/",
+  "ipa": "/bo ˈʃu.da/",
   "cat": "greetings",
   "note": "Jabba, Return of the Jedi; coined by George Lucas. Never officially translated; read by fans as a greeting",
   "sure": false
@@ -19,7 +19,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "huh-CHOO ah-PEN-kee",
   "ipa": "/hə.ˈtʃu a.ˈpɛŋ.ki/",
   "cat": "greetings",
-  "note": "Galactic Phrase Book & Travel Guide; Return of the Jedi subtitles",
+  "note": "Galactic Phrase Book; Star Wars: Absolutely Everything You Need to Know",
   "sure": true
  },
  {
@@ -29,8 +29,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "ah-CHOO-tah",
   "ipa": "/a.ˈtʃu.ta/",
   "cat": "greetings",
-  "note": "Common in fan glossaries and guides",
-  "sure": false
+  "note": "Galactic Phrase Book (“Achuta, mah pee kasa…” = “Hello, my name is…”)",
+  "sure": true
  },
  {
   "id": "chowbaso",
@@ -39,18 +39,18 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "chow-BAH-soh",
   "ipa": "/tʃaʊ.ˈba.so/",
   "cat": "greetings",
-  "note": "Fan glossaries (also spelled chobaso)",
-  "sure": false
+  "note": "Galactic Phrase Book (spelled chobaso in the Star Wars: Legacy comics)",
+  "sure": true
  },
  {
   "id": "chut-chut",
   "hut": "chut chut",
-  "en": "excuse me / never mind",
+  "en": "never mind (also a greeting)",
   "pron": "CHUT CHUT",
   "ipa": "/ˈtʃʊt ˈtʃʊt/",
   "cat": "greetings",
-  "note": "Fan glossaries; Watto-style dismissal",
-  "sure": false
+  "note": "Star Wars: Legacy comics (“never mind”); Anakin greets Watto with it in the Attack of the Clones novelization",
+  "sure": true
  },
  {
   "id": "mee-jewz-ku",
@@ -129,8 +129,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "MAH",
   "ipa": "/ma/",
   "cat": "people",
-  "note": "As in 'Han, ma bookie' (A New Hope SE); variants myo, mwa",
-  "sure": false
+  "note": "Galactic Phrase Book (ma bukee = my boy, ma lorda = my lord); Jabba, A New Hope Special Edition",
+  "sure": true
  },
  {
   "id": "magoosa",
@@ -139,8 +139,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "mah-GOO-sah",
   "ipa": "/ma.ˈɡu.sa/",
   "cat": "people",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Leland Chee's Huttese cheat sheet (Lucasfilm Story Group, 2023)",
+  "sure": true
  },
  {
   "id": "cheekta",
@@ -163,14 +163,14 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "sure": true
  },
  {
-  "id": "bookie",
-  "hut": "bookie",
+  "id": "bukee",
+  "hut": "bukee",
   "en": "boy (as in 'my boy')",
   "pron": "BOO-kee",
   "ipa": "/ˈbu.ki/",
   "cat": "people",
-  "note": "Jabba to Han, A New Hope Special Edition; also spelled bukee",
-  "sure": false
+  "note": "Galactic Phrase Book (ma bukee = my boy); Jabba to Han, A New Hope Special Edition. Also spelled bookie.",
+  "sure": true
  },
  {
   "id": "pateesa",
@@ -263,13 +263,13 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "sure": true
  },
  {
-  "id": "drol",
-  "hut": "drol",
+  "id": "droi",
+  "hut": "droi",
   "en": "droid",
-  "pron": "DROHL",
-  "ipa": "/drol/",
+  "pron": "DROY",
+  "ipa": "/drɔɪ/",
   "cat": "people",
-  "note": "Galactic Phrase Book (fan lists also give droi)",
+  "note": "Galactic Phrase Book (plural: droida)",
   "sure": true
  },
  {
@@ -279,17 +279,17 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "WOO-kee",
   "ipa": "/ˈwu.ki/",
   "cat": "people",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Galactic Phrase Book (“…mo Wooky doo tee puna puna!”)",
+  "sure": true
  },
  {
   "id": "poodoo",
   "hut": "poodoo",
-  "en": "fodder / dung (insult)",
+  "en": "fodder (used as a swear word)",
   "pron": "POO-doo",
   "ipa": "/ˈpu.du/",
   "cat": "insults",
-  "note": "Most common Huttese swear word; Return of the Jedi, The Phantom Menace",
+  "note": "The all-purpose Huttese insult; Return of the Jedi, The Phantom Menace. Often wrongly thought to mean dung.",
   "sure": true
  },
  {
@@ -309,7 +309,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "SLEE-moh",
   "ipa": "/ˈsli.mo/",
   "cat": "insults",
-  "note": "The Phantom Menace (Sebulba, Watto)",
+  "note": "Anakin's insult to Sebulba before the Boonta Eve race, The Phantom Menace; also Zam Wesell's last word, Attack of the Clones",
   "sure": true
  },
  {
@@ -319,8 +319,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "WER-moh",
   "ipa": "/ˈwɛr.mo/",
   "cat": "insults",
-  "note": "The Phantom Menace podrace scene",
-  "sure": false
+  "note": "Sebulba threatening Anakin in the street, The Phantom Menace (subtitled “idiot”); Star Wars: Legacy comics",
+  "sure": true
  },
  {
   "id": "koochoo",
@@ -349,8 +349,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "KOONG",
   "ipa": "/kʊŋ/",
   "cat": "insults",
-  "note": "Fan glossaries; one translator site gives 'kill' instead",
-  "sure": false
+  "note": "From Jabba's “u kulle rah doe kankee kung” (you are my kind of scum), Return of the Jedi; Star Wars: Legacy comics",
+  "sure": true
  },
  {
   "id": "e-chu-ta",
@@ -529,7 +529,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "joh-BOH-bah",
   "ipa": "/dʒo.ˈbo.ba/",
   "cat": "numbers",
-  "note": "Galactic Phrase Book",
+  "note": "Galactic Phrase Book (also transcribed jojoba); written 14 in Hutt base-8 counting",
   "sure": true
  },
  {
@@ -579,8 +579,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "JOO-joo-mon",
   "ipa": "/ˈdʒu.dʒu.mɔn/",
   "cat": "numbers",
-  "note": "Galactic Phrase Book; one counting site reads it as decimal 64 (octal 100) instead",
-  "sure": false
+  "note": "Galactic Phrase Book; in Hutt base-8 counting it is written 144",
+  "sure": true
  },
  {
   "id": "wupiupi",
@@ -675,7 +675,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
  {
   "id": "makacheesa",
   "hut": "makacheesa",
-  "en": "payoff / bribe",
+  "en": "payoff (also prize, fortune)",
   "pron": "mah-kah-CHEE-sah",
   "ipa": "/ma.ka.ˈtʃi.sa/",
   "cat": "money",
@@ -789,18 +789,18 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "kay-FOWN-doh",
   "ipa": "/keɪ.ˈfaʊn.do/",
   "cat": "food",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Star Wars: The Old Republic – the cantina song “Kayfoundo Naweea” (“Hungry Eyes”)",
+  "sure": true
  },
  {
   "id": "hotsa",
   "hut": "hotsa",
-  "en": "hot / spicy",
+  "en": "hot",
   "pron": "HOT-sah",
   "ipa": "/ˈhɔt.sa/",
   "cat": "food",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Galactic Phrase Book menu item “hotsa chuba” (hot chubas)",
+  "sure": true
  },
  {
   "id": "bolla",
@@ -819,7 +819,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "BOS-kah",
   "ipa": "/ˈbɔs.ka/",
   "cat": "actions",
-  "note": "Jabba, A New Hope SE; Lucas coinage for Return of the Jedi",
+  "note": "Jabba, as he drops Oola and then Luke into the rancor pit, Return of the Jedi; coined by George Lucas",
   "sure": true
  },
  {
@@ -839,7 +839,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "NEE CHOO",
   "ipa": "/ni ˈtʃu/",
   "cat": "actions",
-  "note": "Galactic Phrase Book; Jabba's 'yassa nee choo' (ROTJ)",
+  "note": "Galactic Phrase Book; “Nee choo!” = “Die!” (Star Wars: The Visual Encyclopedia)",
   "sure": true
  },
  {
@@ -929,7 +929,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "KOOS",
   "ipa": "/kus/",
   "cat": "actions",
-  "note": "From 'koose cheekta nei'; Jabba's 'koos numa' (ROTJ)",
+  "note": "From Jabba's “koose cheekta nei” (bring her to me), Return of the Jedi",
   "sure": false
  },
  {
@@ -959,8 +959,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "TIN-kah",
   "ipa": "/ˈtɪŋ.ka/",
   "cat": "actions",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Watto: “Tinka me chasa hopoe ma booty na nolia” (they think we know nothing), The Phantom Menace",
+  "sure": true
  },
  {
   "id": "hopa",
@@ -979,8 +979,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "kyoh-TOH-pah",
   "ipa": "/kjo.ˈto.pa/",
   "cat": "actions",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Galactic Phrase Book (“Kavaa kyotopa bu banda backa?” = “Can I visit the band backstage?”)",
+  "sure": true
  },
  {
   "id": "haku",
@@ -999,7 +999,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "KON-chee",
   "ipa": "/ˈkɔn.tʃi/",
   "cat": "questions",
-  "note": "Galactic Phrase Book",
+  "note": "Leland Chee's Huttese cheat sheet (Lucasfilm Story Group, 2023)",
   "sure": true
  },
  {
@@ -1029,7 +1029,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "KOO",
   "ipa": "/ku/",
   "cat": "questions",
-  "note": "Galactic Phrase Book",
+  "note": "Leland Chee's Huttese cheat sheet (Lucasfilm Story Group, 2023)",
   "sure": true
  },
  {
@@ -1039,8 +1039,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "TAG-wah",
   "ipa": "/ˈtaɡ.wa/",
   "cat": "phrases",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Galactic Phrase Book",
+  "sure": true
  },
  {
   "id": "nobata",
@@ -1049,8 +1049,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "noh-BAH-tah",
   "ipa": "/no.ˈba.ta/",
   "cat": "phrases",
-  "note": "Fan glossaries",
-  "sure": false
+  "note": "Galactic Phrase Book",
+  "sure": true
  },
  {
   "id": "nagoola",
@@ -1069,7 +1069,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "in-kah-BUN-gah",
   "ipa": "/ɪn.ka.ˈbʌŋ.ɡa/",
   "cat": "phrases",
-  "note": "The Phantom Menace; Galactic Phrase Book",
+  "note": "Galactic Phrase Book; also heard in The Clone Wars (“Hunt for Ziro”)",
   "sure": true
  },
  {
@@ -1079,7 +1079,7 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "BUN-kee DUN-koh",
   "ipa": "/ˈbʌŋ.ki ˈdʌŋ.ko/",
   "cat": "places",
-  "note": "Galactic Phrase Book; 'tolpa da bunky dunko' = then you can go home",
+  "note": "Galactic Phrase Book",
   "sure": true
  },
  {
@@ -1139,8 +1139,8 @@ export const WORDS: (Word & { sure: boolean })[] = [
   "pron": "BLAS-toh",
   "ipa": "/ˈblæs.to/",
   "cat": "things",
-  "note": "Fan glossaries (also punyoo = weapon)",
-  "sure": false
+  "note": "Galactic Phrase Book (“Kee hasa do blastoh” = “Drop your weapon”)",
+  "sure": true
  },
  {
   "id": "wankee",
@@ -1232,7 +1232,7 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "pron": "KOO-nah tuh-CHOO-tah",
   "ipa": "/ˈku.na tə.ˈtʃu.ta/",
   "cat": "questions",
-  "note": "Greedo to Han Solo, A New Hope cantina",
+  "note": "Greedo to Han Solo in the Mos Eisley cantina, A New Hope. On screen it sounds more like “OO-tah GOO-tah”.",
   "sure": true,
   "enBuild": "going somewhere"
  },
@@ -1281,7 +1281,7 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "pron": "WAN-tah dah MOO-lee-rah",
   "ipa": "/ˈwan.ta da ˈmu.li.ra/",
   "cat": "questions",
-  "note": "A New Hope (Jabba/Greedo context); Galactic Phrase Book",
+  "note": "Jabba to Han, A New Hope Special Edition; Galactic Phrase Book",
   "sure": true,
   "gloss": [
    [
@@ -1294,12 +1294,12 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
  {
   "id": "kava-che-copah",
   "hut": "kava che copah?",
-  "en": "how much (is the price)?",
+  "en": "how much for that item?",
   "pron": "KAH-vah CHEH KOH-pah",
   "ipa": "/ˈka.va tʃɛ ˈko.pa/",
   "cat": "questions",
-  "note": "Fan glossaries; built from Phrase Book words",
-  "sure": false,
+  "note": "Galactic Phrase Book, “At the merchant”",
+  "sure": true,
   "gloss": [
    [
     "kava",
@@ -1310,7 +1310,7 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
     "price"
    ]
   ],
-  "enBuild": "how much is it"
+  "enBuild": "how much for that item"
  },
  {
   "id": "soong-peetch-alay",
@@ -1334,14 +1334,14 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "sure": true
  },
  {
-  "id": "han-ma-bookie",
-  "hut": "han, ma bookie",
+  "id": "han-ma-bukee",
+  "hut": "han, ma bukee",
   "en": "Han, my boy",
   "pron": "HAN mah BOO-kee",
   "ipa": "/hæn ma ˈbu.ki/",
   "cat": "phrases",
-  "note": "Jabba, A New Hope Special Edition",
-  "sure": false,
+  "note": "Jabba to Han, A New Hope Special Edition (“Han, my boy, you disappoint me”)",
+  "sure": true,
   "gloss": [
    [
     "han",
@@ -1352,7 +1352,7 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
     "my"
    ],
    [
-    "bookie",
+    "bukee",
     "boy"
    ]
   ]
@@ -1381,7 +1381,7 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "pron": "NUD CHAH",
   "ipa": "/nʌd tʃa/",
   "cat": "phrases",
-  "note": "Return of the Jedi; The Mandalorian",
+  "note": "Galactic Phrase Book; The Mandalorian, chapter 1 (“U doba, nudd chaa!” = “You two, get going!”)",
   "sure": true
  },
  {
@@ -1391,7 +1391,7 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "pron": "KOOS CHEEK-tah NAY",
   "ipa": "/kus ˈtʃik.ta neɪ/",
   "cat": "phrases",
-  "note": "Galactic Phrase Book",
+  "note": "Jabba, about Leia, Return of the Jedi; Galactic Phrase Book",
   "sure": true,
   "gloss": [
    [
@@ -1412,10 +1412,10 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "id": "ap-xmasi-keepuna",
   "hut": "ap-xmasi keepuna!",
   "en": "don't shoot!",
-  "pron": "ap-ZMAH-see kee-POO-nah",
-  "ipa": "/ap.ˈzma.si ki.ˈpu.na/",
+  "pron": "ap-MAH-see kee-POO-nah",
+  "ipa": "/ap.ˈʘma.si ki.ˈpu.na/",
   "cat": "phrases",
-  "note": "Galactic Phrase Book; the x is a lip-smack sound",
+  "note": "Galactic Phrase Book. The x is a lip-smack (a bilabial click) just before MAH.",
   "sure": true,
   "gloss": [
    [
@@ -1459,13 +1459,13 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "sure": true
  },
  {
-  "id": "cha-skrunee-do-pat-sleemo",
-  "hut": "cha skrunee do pat, sleemo",
+  "id": "cha-skrunee-da-pat-sleemo",
+  "hut": "cha skrunee da pat, sleemo",
   "en": "don't count on it, slimeball",
-  "pron": "CHAH SKROO-nee doh PAT SLEE-moh",
-  "ipa": "/tʃa ˈskru.ni do pæt ˈsli.mo/",
+  "pron": "CHAH SKROO-nee dah PAT SLEE-moh",
+  "ipa": "/tʃa ˈskru.ni da pæt ˈsli.mo/",
   "cat": "phrases",
-  "note": "Galactic Phrase Book",
+  "note": "Anakin to Sebulba before the Boonta Eve race, The Phantom Menace; Galactic Phrase Book",
   "sure": true,
   "gloss": [
    [
@@ -1502,8 +1502,8 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "pron": "KAH BAZ-zah KUN-dee hoh-DROO-dah",
   "ipa": "/ka ˈbaz.za ˈkʌn.di ho.ˈdru.da/",
   "cat": "phrases",
-  "note": "Jabba opening the Boonta Eve race, The Phantom Menace",
-  "sure": true,
+  "note": "Linked to the Boonta Eve podrace (the title of a 1999 Young Jedi card). The translation “let the challenge begin” is a fan reading – no subtitle confirms it.",
+  "sure": false,
   "gloss": [
    [
     "hodrudda",
@@ -1518,8 +1518,8 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "pron": "WEE NOW KONG BAN-thah POO-doo",
   "ipa": "/wi naʊ kɔŋ ˈbæn.θa ˈpu.du/",
   "cat": "phrases",
-  "note": "Star Wars Visual Encyclopedia",
-  "sure": false,
+  "note": "Jabba to Han after he is thawed from carbonite, Return of the Jedi",
+  "sure": true,
   "gloss": [
    [
     "bantha poodoo",
@@ -1529,15 +1529,21 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
   "enBuild": "now you're bantha fodder"
  },
  {
-  "id": "chuba-doompasha-lo",
-  "hut": "chuba! doompasha lo!",
-  "en": "hey! watch it!",
-  "pron": "CHOO-bah doom-PAH-shah LOH",
-  "ipa": "/ˈtʃu.ba dum.ˈpa.ʃa lo/",
+  "id": "kee-hasa-do-blastoh",
+  "hut": "kee hasa do blastoh",
+  "en": "drop your weapon",
+  "pron": "KEE HAH-sah doh BLAS-toh",
+  "ipa": "/ki ˈha.sa do ˈblæs.to/",
   "cat": "phrases",
-  "note": "Dooku: Jedi Lost (audio drama)",
-  "sure": false,
-  "enBuild": "hey watch it"
+  "note": "Galactic Phrase Book",
+  "sure": true,
+  "gloss": [
+   [
+    "blastoh",
+    "weapon"
+   ]
+  ],
+  "enBuild": "drop your weapon"
  },
  {
   "id": "dopo-me-goola",
@@ -1553,23 +1559,24 @@ export const PHRASES: (Phrase & { sure: boolean })[] = [
  {
   "id": "no-bata-tu-tu",
   "hut": "no bata tu tu",
-  "en": "I didn't do it",
+  "en": "whatever it is, I didn't do it",
   "pron": "NOH BAH-tah TOO TOO",
   "ipa": "/no ˈba.ta tu tu/",
   "cat": "phrases",
-  "note": "Watto, The Phantom Menace (per fan transcripts)",
-  "sure": false
+  "note": "Watto, when Anakin finds him in Mos Espa, Attack of the Clones (translation from the novelization)",
+  "sure": true,
+  "enBuild": "whatever it is I didn't do it"
  },
  {
   "id": "gi-shatta-gasha",
   "hut": "gi shatta gasha!",
-  "en": "the son of suns!",
+  "en": "hooray! (a cheer of joy and praise)",
   "pron": "GEE SHAT-tah GAH-shah",
   "ipa": "/ɡi ˈʃat.ta ˈɡa.ʃa/",
   "cat": "phrases",
-  "note": "Return of the Jedi",
-  "sure": false,
-  "enBuild": "the son of suns"
+  "note": "Shouted by the crowds at the Naboo victory parade (The Phantom Menace) and the Coruscant celebration (Return of the Jedi Special Edition). Often misheard as “son of suns” – a debunked myth.",
+  "sure": true,
+  "enBuild": "hooray"
  }
 ];
 
@@ -1586,12 +1593,12 @@ export const GRAMMAR = [
  },
  {
   "title": "jee / jee-jee",
-  "text": "doubling a word can make a plural (I to we)",
+  "text": "jee-jee (we) looks like a doubled jee (I). Doubled words are common in Huttese – baatu baatu, chut chut, puna puna – but no source gives a general plural rule.",
   "note": "Reduplication is common: baatu baatu, chut chut, puna puna"
  },
  {
   "title": "question word first",
-  "text": "question words (haku, konchee, kava, coo, joppay) come first in a question",
+  "text": "In the questions we have, question words (haku, konchee, kava, coo, joppay) usually come first.",
   "note": "Pattern seen in Phrase Book sentences"
  },
  {
@@ -1601,7 +1608,7 @@ export const GRAMMAR = [
  },
  {
   "title": "no please / thank you",
-  "text": "Huttese has no attested words for 'please' or 'thank you'",
-  "note": "Noted by fan reference guides"
+  "text": "Ben Burtt's Phrase Book jokes that Hutts have no words for “please” or “thank you” (a later game does give jupa uba for “thank you”).",
+  "note": "Galactic Phrase Book & Travel Guide; Star Wars: Hunters"
  }
 ];

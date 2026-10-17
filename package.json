@@ -9,12 +9,14 @@
     "build": "astro build",
     "preview": "astro build && wrangler dev",
     "deploy": "astro build && wrangler deploy",
-    "test": "esbuild scripts/check-course.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/check-course.mjs --log-level=warning && node node_modules/.cache/check-course.mjs"
+    "test": "esbuild scripts/check-course.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/check-course.mjs --log-level=warning && node node_modules/.cache/check-course.mjs",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "astro": "^7.4.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "typescript": "^7.0.2",
     "wrangler": "^4.151.1"
   }

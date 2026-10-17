@@ -66,6 +66,10 @@
 * {
   box-sizing: border-box;
 }
+/* Components set their own display (grid/flex), which would otherwise override the hidden attribute. */
+[hidden] {
+  display: none !important;
+}
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -545,11 +549,17 @@ kbd {
     transform: translateY(-5px);
   }
 }
+/* Each node-wrap is its own stacking context (transform), so lift the open one above the nodes after it. */
+.node-wrap:has(> .popover:not([hidden])) {
+  z-index: 10;
+}
 .popover {
   position: absolute;
   top: 88px;
   z-index: 5;
-  width: 260px;
+  width: min(260px, calc(100vw - 32px));
+  /* centre under the path rather than the zig-zagged node so it never spills off a phone screen */
+  transform: translateX(calc(-1 * var(--x, 0px)));
   background: var(--c, var(--hutt));
   color: #fff;
   border-radius: var(--radius);
@@ -950,6 +960,17 @@ kbd {
 .hint {
   color: var(--ink-2);
   margin: 6px 0 0;
+}
+.hint-btn {
+  margin-top: 8px;
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--blue);
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  cursor: pointer;
 }
 
 /* sentence building */

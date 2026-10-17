@@ -1,7 +1,7 @@
 // Sanity-checks every lesson: ids resolve, exercises generate, options are distinct and include the answer.
 import { ALL_LESSONS } from '../src/data/course';
-import { generate, sense } from '../src/lib/engine';
-import { tokenize } from '../src/lib/script';
+import { generate, sense, checkTyped, equivalents } from '../src/lib/engine';
+import { tokenize, GLYPHS } from '../src/lib/script';
 import { WORDS, PHRASES } from '../src/data/vocab';
 
 let problems = 0;
@@ -29,6 +29,42 @@ for (const l of ALL_LESSONS) {
   const sample = generate(l, { firstTime: true, speech: true });
   console.log(l.id.padEnd(18), sample.length, sample.map((e) => e.type[0] + ('prompt' in e ? e.prompt[0] : '')).join(' '));
 }
+// Content: each respelling must agree with its IPA (words, syllables, stressed syllable).
+for (const e of [...WORDS, ...PHRASES]) {
+  const pw = e.pron.replace(/[,!?]/g, '').trim().split(/\s+/);
+  const iw = e.ipa.replace(/^\/|\/$/g, '').trim().split(/\s+/);
+  if (pw.length !== iw.length) { warn(`${e.hut}: ${pw.length} words in "${e.pron}" but ${iw.length} in ${e.ipa}`); continue; }
+  pw.forEach((w, i) => {
+    const ps = w.split('-');
+    const is = iw[i].replace(/ˌ/g, '.').split('.').filter(Boolean);
+    if (ps.length !== is.length) return warn(`${e.hut}: "${w}" has ${ps.length} syllables, IPA "${iw[i]}" has ${is.length}`);
+    if (ps.length < 2) return;
+    const pStress = ps.findIndex((s) => /[A-Z]/.test(s) && s === s.toUpperCase());
+    const iStress = is.findIndex((s) => s.includes('ˈ'));
+    if (pStress !== iStress) warn(`${e.hut}: stress on syllable ${pStress + 1} in "${w}" but ${iStress + 1} in ${iw[i]}`);
+  });
+}
+
+// Script: every glyph is drawn differently.
+const paths = new Map<string, string>();
+for (const g of GLYPHS) {
+  if (paths.has(g.path)) warn(`glyphs ${paths.get(g.path)} and ${g.key} are identical`);
+  paths.set(g.path, g.key);
+}
+
+// Answer checking.
+const expectEq = (label: string, got: unknown, want: unknown) => { if (got !== want) warn(`${label}: got ${got}, want ${want}`); };
+expectEq('exact', checkTyped('bo shuda', 'bo shuda'), 'right');
+expectEq('capitals + punctuation', checkTyped('Inkabunga', 'inkabunga!'), 'right');
+expectEq('apostrophe optional', checkTyped('kwanna', "k'wanna"), 'right');
+expectEq('one-letter slip', checkTyped('pateea', 'pateesa'), 'typo');
+expectEq('wrong word', checkTyped('poodoo', 'pateesa'), 'wrong');
+expectEq('blank', checkTyped('  ', 'bo'), 'wrong');
+const word = (hut: string) => ({ ...WORDS.find((w) => w.hut === hut)!, kind: 'word' as const });
+expectEq('synonym accepted (you)', equivalents(word('uba')).includes('chuba'), true);
+expectEq('synonym accepted (greetings)', equivalents(word("h'chu apenkee")).includes('bo shuda'), true);
+expectEq('different meaning not accepted', equivalents(word('bantha poodoo')).includes('poodoo'), false);
+
 const used = new Set(ALL_LESSONS.flatMap((l) => [...(l.words ?? []), ...(l.phrases ?? [])]));
 const unused = [...WORDS, ...PHRASES].filter((w) => !used.has(w.id)).map((w) => w.id);
 console.log('not in any lesson (dictionary only):', unused.join(', ') || 'none');

@@ -400,9 +400,15 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions) {
       <div class="prompt-en">“${esc(it.en)}”</div>
       <input class="type-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type in Huttese" aria-label="Your answer" />
       <div class="type-preview" aria-hidden="true"></div>
-      <p class="hint">Hint: ${esc(it.pron)}</p>`;
+      <button type="button" class="hint-btn" data-hint>💡 Show hint</button>`;
     const input = stage.querySelector<HTMLInputElement>('input')!;
     const preview = stage.querySelector<HTMLElement>('.type-preview')!;
+    const hint = stage.querySelector<HTMLButtonElement>('[data-hint]')!;
+    hint.addEventListener('click', () => {
+      hint.outerHTML = `<p class="hint">Sounds like <b>${esc(it.pron)}</b></p>`;
+      say(it);
+      input.focus();
+    });
     input.addEventListener('input', () => {
       preview.innerHTML = input.value.trim() ? renderScript(input.value, { size: 26 }) : '';
       changed();

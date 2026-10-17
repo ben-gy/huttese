@@ -39,7 +39,7 @@ const cats = ['all', ...new Set(entries.map((e) => e.cat))];
           </button>
           <div class="e-note">
             {e.note}
-            {!e.sure && ' · (meaning less certain – from fan sources)'}
+            {!e.sure && ' · Fan reading – not confirmed by an official source.'}
           </div>
         </article>
       ))

@@ -27,7 +27,7 @@ export const UNITS: UnitWithTips[] = [
       tip('no please / thank you'),
       {
         title: 'Reading the respellings',
-        text: 'Pronunciations are written as English-style respellings: the syllable in CAPITALS is stressed. “BOH SHOO-dah” = boh SHOO-dah. Vowels are pure, as in Spanish: a = ah, e = eh, i/ee = ee, o = oh, u/oo = oo.',
+        text: 'Pronunciations are written as English-style respellings: the syllable in CAPITALS is stressed. “BOH SHOO-dah” = boh SHOO-dah. Vowels are mostly pure, as in Spanish: a = ah, e = eh, i/ee = ee, o = oh, u/oo = oo. In short closed syllables the respellings use English short vowels instead (shag, chik, BUN-kee).',
       },
     ],
     lessons: [
@@ -35,7 +35,7 @@ export const UNITS: UnitWithTips[] = [
       w('greetings', 'Greetings', ['bo-shuda', 'h-chu-apenkee', 'achuta', 'chowbaso', 'mee-jewz-ku']),
       g('script-stops', 'Glyphs: b d p t k g', ['b', 'd', 'p', 't', 'k', 'g']),
       w('yes-no', 'Yes, no & wow', ['tagwa', 'nobata', 'nagoola', 'chut-chut', 'inkabunga']),
-      p('first-phrases', 'Cantina chatter', ['koona-t-chuta', 'hi-chuba-da-naga', 'han-ma-bookie']),
+      p('first-phrases', 'Cantina chatter', ['koona-t-chuta', 'hi-chuba-da-naga', 'han-ma-bukee']),
     ],
   },
   {
@@ -47,8 +47,8 @@ export const UNITS: UnitWithTips[] = [
     lessons: [
       g('script-sonorants', 'Glyphs: m n l s h r', ['m', 'n', 'l', 's', 'h', 'r']),
       w('pronouns', 'I, you & we', ['jee', 'jee-jee', 'uba', 'chuba', 'ma', 'hoohah']),
-      w('friends', 'Friends & bosses', ['pateesa', 'lorda', 'peedunkee', 'bookie', 'cheeka', 'cheekta']),
-      w('court', 'The court', ['murishani', 'ulwan', 'ootmian', 'jeedai', 'drol', 'wooky']),
+      w('friends', 'Friends & bosses', ['pateesa', 'lorda', 'peedunkee', 'bukee', 'cheeka', 'cheekta']),
+      w('court', 'The court', ['murishani', 'ulwan', 'ootmian', 'jeedai', 'droi', 'wooky']),
       p('peace', 'Making friends', ['dolpee-kikyuna', 'nee-dolya-pukee-toba', 'koose-cheekta-nei']),
     ],
   },
@@ -115,13 +115,13 @@ export const UNITS: UnitWithTips[] = [
     tips: [
       {
         title: 'Poodoo',
-        text: 'Poodoo (“fodder, dung”) is the all-purpose Huttese swear word. Calling someone bantha poodoo means they are worth less than animal feed.',
+        text: 'Poodoo (“fodder”) is the all-purpose Huttese swear word. Calling someone bantha poodoo (bantha fodder) says they’re no better than animal feed. It is often thought to mean dung – it doesn’t.',
       },
     ],
     lessons: [
       w('insults-1', 'Classic insults', ['poodoo', 'bantha-poodoo', 'sleemo', 'wermo', 'koochoo', 'stupa']),
       w('insults-2', 'Advanced rudeness', ['kung', 'e-chu-ta', 'sleemo-poy', 'cheeskar-nok', 'loca', 'goola']),
-      p('insult-phrases', 'Trash talk', ['wee-now-kong-bantha-poodoo', 'cha-skrunee-do-pat-sleemo', 'kee-baatu-baatu', 'no-bata-tu-tu']),
+      p('insult-phrases', 'Trash talk', ['wee-now-kong-bantha-poodoo', 'cha-skrunee-da-pat-sleemo', 'kee-baatu-baatu', 'no-bata-tu-tu']),
     ],
   },
   {
@@ -136,7 +136,7 @@ export const UNITS: UnitWithTips[] = [
       w('podrace', 'Race day', ['choppa-chawa', 'hodrudda', 'shag', 'chik-youngee', 'magoosa']),
       w('palace-life', 'Palace life', ['na-yoka', 'howdunga', 'hunka-be']),
       p('famous-lines', 'Famous lines', ['kaa-bazza-kundee-hodrudda', 'soong-peetch-alay', 'keel-ee-calleya-ku-kah']),
-      p('more-lines', 'Last words', ['chuba-doompasha-lo', 'dopo-me-goola', 'gi-shatta-gasha']),
+      p('more-lines', 'Last words', ['kee-hasa-do-blastoh', 'dopo-me-goola', 'gi-shatta-gasha']),
     ],
   },
 ];

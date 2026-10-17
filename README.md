@@ -19,9 +19,12 @@ A Duolingo-style course for Huttese, the language of Jabba the Hutt. It's a stat
 
 ```bash
 npm run dev       # local dev server
-npm test          # sanity-check every lesson: ids resolve, no ambiguous options, banks contain answers
+npm test          # course checks: ids resolve, no ambiguous options, respelling/IPA stress agree, answer checking
+npm run test:e2e  # Playwright (uses installed Google Chrome) against the production build, desktop + phone
 npm run build     # static build to dist/
 npm run deploy    # build + wrangler deploy
 ```
+
+The end-to-end suite plays the course as a black-box learner (`e2e/learner.ts`). It reads only the screen (visible text, the drawn glyph shapes and the speech that was actually requested) and works out answers from the course data. A new learner completes all 36 lessons in order from the home path, on desktop and at phone width. Other tests cover hearts, retries, quitting, keyboard play, typing tolerance, practice, streaks, settings, export/import, the dictionary, the script page, and a check for errors, sideways scroll and unlabelled controls on every page. Screenshots of every exercise type are saved to `screenshots/`.
 
 Unofficial fan project. Star Wars, Jabba the Hutt and Huttese are trademarks of Lucasfilm Ltd.
