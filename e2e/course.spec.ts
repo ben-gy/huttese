@@ -16,8 +16,9 @@ test('a new learner can complete the whole course in order from the home path', 
 
   await page.goto('/');
   await expect(page.locator('[data-welcome]')).toBeVisible();
-  const xpOnHome = () => page.locator('[data-xp]:visible').first().innerText().then(Number);
-  expect(await xpOnHome()).toBe(0);
+  // The counters are filled in by a script after load, so wait for the value rather than reading it once.
+  const xpOnHome = page.locator('[data-xp]:visible').first();
+  await expect(xpOnHome).toHaveText('0');
 
   // Only the first lesson is open; the second explains why it is locked.
   const node = (id: string) => page.locator(`[data-lesson="${id}"]`);
@@ -62,7 +63,7 @@ test('a new learner can complete the whole course in order from the home path', 
 
     await page.locator('[data-action]').click();
     await expect(page).toHaveURL(/\/$/);
-    expect(await xpOnHome()).toBe(xp);
+    await expect(xpOnHome).toHaveText(String(xp));
     await expect(node(lesson.id).locator('.node')).toHaveClass(/done/);
   }
 

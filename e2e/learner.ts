@@ -297,7 +297,9 @@ export async function collectErrors(page: Page): Promise<string[]> {
   page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
   page.on('console', (m) => {
     // The 404 page is meant to answer 404; anything else failing to load is a real error.
-    if (m.type() === 'error' && !/\/no-such-page\/?$/.test(m.location().url)) errors.push(`console: ${m.text()} (${m.location().url})`);
+    // Cloudflare can inject its Web Analytics beacon on the live site; it isn't ours and may be blocked by the network.
+    const url = m.location().url;
+    if (m.type() === 'error' && !/\/no-such-page\/?$/.test(url) && !url.includes('cloudflareinsights.com')) errors.push(`console: ${m.text()} (${url})`);
   });
   return errors;
 }
