@@ -31,6 +31,8 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Cookie-less Cloudflare Web Analytics, shared by every site listed on lab.benrichardson.dev -->
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "ba2bab2193ba42c1bea3d6714fcd0e28"}'></script>
     <script is:inline>
       try {
         const s = JSON.parse(localStorage.getItem('huttese:v1') || '{}').settings || {};
@@ -83,7 +85,11 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
             <p class="footnote">
               An unofficial fan project. Star Wars, Jabba the Hutt and Huttese are trademarks of Lucasfilm Ltd. Vocabulary is drawn from the films,
               Ben Burtt’s <em>Galactic Phrase Book &amp; Travel Guide</em> and other Star Wars books, comics and games; entries marked as fan readings in
-              the dictionary are unofficial. The Hutt glyphs are an original design. Your progress is stored only in this browser.
+              the dictionary are unofficial. The Hutt glyphs are an original design. Your progress is stored only in this browser; page visits are counted with cookie-less
+              Cloudflare Web Analytics.
+            </p>
+            <p class="footnote">
+              Built by <a href="https://benrichardson.dev/">benrichardson.dev</a> · more in the <a href="https://lab.benrichardson.dev/">lab</a>
             </p>
           </aside>
           <nav class="mobilebar" aria-label="Main">

@@ -1,6 +1,6 @@
 # Huttese
 
-A Duolingo-style course for Huttese, the language of Jabba the Hutt. It's a static Astro site deployed to Cloudflare as Workers static assets. There are no accounts and no backend: all progress lives in `localStorage`.
+A Duolingo-style course for Huttese, the language of Jabba the Hutt. It's a static Astro site on GitHub Pages at https://huttese.benrichardson.dev, listed in the [lab](https://lab.benrichardson.dev) directory. There are no accounts and no backend: all progress lives in `localStorage`.
 
 ## What's in it
 
@@ -22,8 +22,12 @@ npm run dev       # local dev server
 npm test          # course checks: ids resolve, no ambiguous options, respelling/IPA stress agree, answer checking
 npm run test:e2e  # Playwright (uses installed Google Chrome) against the production build, desktop + phone
 npm run build     # static build to dist/
-npm run deploy    # build + wrangler deploy
+npm run preview   # build + serve dist/ locally
 ```
+
+## Deploying
+
+A push to `main` runs `.github/workflows/deploy.yml` (course checks → build → GitHub Pages). The custom domain is pinned by `public/CNAME`; DNS is a Cloudflare CNAME `huttese → ben-gy.github.io` (DNS only). The site is listed in `ben-gy/gh-site-factory`'s `index/sites.json`, which lab.benrichardson.dev reads.
 
 The end-to-end suite plays the course as a black-box learner (`e2e/learner.ts`). It reads only the screen (visible text, the drawn glyph shapes and the speech that was actually requested) and works out answers from the course data. A new learner completes all 36 lessons in order from the home path, on desktop and at phone width. Other tests cover hearts, retries, quitting, keyboard play, typing tolerance, practice, streaks, settings, export/import, the dictionary, the script page, and a check for errors, sideways scroll and unlabelled controls on every page. Screenshots of every exercise type are saved to `screenshots/`.
 

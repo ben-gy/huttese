@@ -2,13 +2,12 @@
   "name": "huttese",
   "version": "1.0.0",
   "private": true,
-  "description": "Learn Huttese – a Duolingo-style course for the language of Jabba the Hutt. Static Astro site on Cloudflare.",
+  "description": "Learn Huttese – a Duolingo-style course for the language of Jabba the Hutt. Static Astro site on GitHub Pages.",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro build && wrangler dev",
-    "deploy": "astro build && wrangler deploy",
+    "preview": "astro build && astro preview --ignore-lock",
     "test": "esbuild scripts/check-course.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/check-course.mjs --log-level=warning && node node_modules/.cache/check-course.mjs",
     "test:e2e": "playwright test"
   },
@@ -17,7 +16,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",
-    "typescript": "^7.0.2",
-    "wrangler": "^4.151.1"
+    "typescript": "^7.0.2"
   }
 }
